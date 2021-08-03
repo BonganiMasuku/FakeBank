@@ -57,5 +57,5 @@
 ### Api
     *   POST "/BankAccount/Create"
     *   GET "/BankAccount/Balance/:bankAccountId"
-    *   POST "/BankAccountTransfer/Create"
+    *   POST "/BankAccountTransfer/Execute"
     *   GET "/BankAccountTransfer/History/:bankAccountId"
