@@ -7,7 +7,7 @@ namespace FakeBankModel.Interfaces
 {
     public interface IBankAccountTransferModel
     {
-        bool Execute(int fromAccountId, int toAccountId, double amount);
+        void Execute(int fromAccountId, int toAccountId, double amount);
         List<IBankAccountTransferContract> GetAccountHistory(int accountId, TransferRoleEnum transferRole);
     }
 }

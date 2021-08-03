@@ -6,7 +6,7 @@ namespace FakeBankModel.Interfaces
 {
     public interface ITransactionModel
     {
-        bool Add(int accountId, string description, double amount);
+        void Add(int accountId, string description, double amount);
         List<ITransactionContract> GetByAccountId(int accountId);
     }
 }

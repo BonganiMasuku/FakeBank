@@ -13,9 +13,9 @@ namespace FakeBankService.Implementations
             _transactionModel = transactionModel;
         }
 
-        public bool AddOpeningDeposit(int accountId, double amount)
+        public void AddOpeningDeposit(int accountId, double amount)
         {
-            return _transactionModel.Add(accountId, "Opening Deposit", amount);
+            _transactionModel.Add(accountId, "Opening Deposit", amount);
         }
 
         public double GetBalance(int bankAccountId)

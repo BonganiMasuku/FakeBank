@@ -10,7 +10,7 @@ namespace FakeBankModel.Implementations
     {
         private List<ITransactionContract> transactionList = new List<ITransactionContract>();
 
-        public bool Add(int accountId, string description, double amount)
+        public void Add(int accountId, string description, double amount)
         {
             transactionList.Add(new TransactionContract
             {
@@ -20,8 +20,6 @@ namespace FakeBankModel.Implementations
                 Amount = amount,
                 CreatedAt = DateTime.Now
             });
-
-            return true;
         }
 
         public List<ITransactionContract> GetByAccountId(int accountId)

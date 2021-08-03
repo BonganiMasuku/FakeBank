@@ -13,14 +13,12 @@ namespace FakeBankService.Implementations
             _transactionModel = transactionModel;
         }
 
-        public bool AddTransactions(int fromAccountId, int toAccountId, double amount)
+        public void AddTransactions(int fromAccountId, int toAccountId, double amount)
         {
             var description = "Inter-account Transfer";
 
             _transactionModel.Add(fromAccountId, description, amount * -1);
             _transactionModel.Add(toAccountId, description, amount);
-
-            return true;
         }
     }
 }

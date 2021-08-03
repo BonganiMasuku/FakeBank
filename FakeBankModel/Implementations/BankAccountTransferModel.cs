@@ -11,7 +11,7 @@ namespace FakeBankModel.Implementations
     {
         private List<IBankAccountTransferContract> bankAccountTransferList = new List<IBankAccountTransferContract>();
 
-        public bool Execute(int fromAccountId, int toAccountId, double amount)
+        public void Execute(int fromAccountId, int toAccountId, double amount)
         {
             bankAccountTransferList.Add(new BankAccountTransferContract
             {
@@ -21,8 +21,6 @@ namespace FakeBankModel.Implementations
                 Amount = amount,
                 CreatedAt = DateTime.Now
             });
-
-            return true;
         }
 
         public List<IBankAccountTransferContract> GetAccountHistory(int accountId, TransferRoleEnum transferRole)

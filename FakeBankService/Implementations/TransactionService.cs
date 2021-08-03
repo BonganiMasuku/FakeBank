@@ -15,9 +15,9 @@ namespace FakeBankService.Implementations
             _transactionModel = transactionModel;
         }
 
-        public bool Add(int accountId, string description, double amount)
+        public void Add(int accountId, string description, double amount)
         {
-            return _transactionModel.Add(accountId, description, amount);
+            _transactionModel.Add(accountId, description, amount);
         }
 
         public List<ITransactionContract> GetByAccountId(int accountId)

@@ -21,12 +21,10 @@ namespace FakeBankService.Implementations
             _bankAccountTransferTransactionService = bankAccountTransferTransactionService;
         }
 
-        public bool Execute(int fromAccountId, int toAccountId, double amount)
+        public void Execute(int fromAccountId, int toAccountId, double amount)
         {
             _bankAccountTransferModel.Execute(fromAccountId, toAccountId, amount);
             _bankAccountTransferTransactionService.AddTransactions(fromAccountId, toAccountId, amount);
-
-            return true;
         }
 
         public List<IBankAccountTransferContract> GetAccountHistory(int accountId, TransferRoleEnum transferRole)
