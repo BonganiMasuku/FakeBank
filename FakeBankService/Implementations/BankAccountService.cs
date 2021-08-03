@@ -8,22 +8,39 @@ namespace FakeBankService.Implementations
 {
     public class BankAccountService : IBankAccountService
     {
+        private readonly ICustomerService _customerService;
         private readonly IBankAccountModel _bankAccountModel;
         private readonly IBankAccountTransactionService _bankAccountTransactionService;
 
         public BankAccountService(
+            ICustomerService customerService,
             IBankAccountModel bankAccountModel,
             IBankAccountTransactionService bankAccountTransactionService
             )
         {
+            _customerService = customerService;
             _bankAccountModel = bankAccountModel;
             _bankAccountTransactionService = bankAccountTransactionService;
         }
 
-        public bool Create(int customerId, string name, double initialDeposit)
+        public void Create(int customerId, string name, double initialDeposit)
         {
-            var newBankAccount = _bankAccountModel.Create(customerId, name);
-            return _bankAccountTransactionService.AddOpeningDeposit(newBankAccount.Id, initialDeposit);
+            try
+            {
+                var newBankAccount = _bankAccountModel.Create(customerId, name);
+
+                var exists = _customerService.Exists(customerId);
+                if (!exists)
+                {
+                    throw new Exception("Customer not found with provided Id");
+                }
+
+                _bankAccountTransactionService.AddOpeningDeposit(newBankAccount.Id, initialDeposit);
+            }
+            catch (Exception e)
+            {
+                throw;
+            }
         }
 
         public List<IBankAccountContract> Get()
