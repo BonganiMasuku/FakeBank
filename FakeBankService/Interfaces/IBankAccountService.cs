@@ -6,7 +6,7 @@ namespace FakeBankService.Interfaces
 {
     public interface IBankAccountService
     {
-        void Create(int customerId, string name, double initialDeposit);
+        int Create(int customerId, string name, double initialDeposit);
         List<IBankAccountContract> Get();
         IBankAccountContract GetById(int bankAccountId);
         bool Exists(int bankAccountId);

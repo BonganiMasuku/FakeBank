@@ -13,8 +13,8 @@ namespace FakeBankService.Implementations
         private readonly IBankAccountTransactionService _bankAccountTransactionService;
 
         public BankAccountService(
-            ICustomerService customerService,
             IBankAccountModel bankAccountModel,
+            ICustomerService customerService,
             IBankAccountTransactionService bankAccountTransactionService
             )
         {
@@ -23,19 +23,21 @@ namespace FakeBankService.Implementations
             _bankAccountTransactionService = bankAccountTransactionService;
         }
 
-        public void Create(int customerId, string name, double initialDeposit)
+        public int Create(int customerId, string name, double initialDeposit)
         {
             try
             {
-                var newBankAccount = _bankAccountModel.Create(customerId, name);
-
                 var exists = _customerService.Exists(customerId);
                 if (!exists)
                 {
                     throw new Exception("Customer not found with provided Id");
                 }
 
+                var newBankAccount = _bankAccountModel.Create(customerId, name);
+
                 _bankAccountTransactionService.AddOpeningDeposit(newBankAccount.Id, initialDeposit);
+
+                return newBankAccount.Id;
             }
             catch (Exception e)
             {
